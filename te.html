@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+body {
+    height: 100vh;
+    width: 100vw; 
+    overflow: hidden;
+}
+.content {
+  width: 80%;
+  margin: 50px auto;
+}
+h1 {
+  text-align: center;
+}
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  max-width: 320px;
+  height: 50vh;
+}
+input#keyword {
+  font-size: 18px;
+  padding: 10px 20px;
+  outline: 0;
+  border: 1px solid #0f62fe;
+  width: auto;
+}
+span.highlight {
+  color: red;
+  text-shadow: 0 1px 1px red;
+}
+
+
+
+footer a {
+  text-decoration:none;
+  color:#000;
+}
+
+footer {
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  text-align:center;
+  background:#f2f4f6;
+}
+    </style>
+</head>
+<body>
+    <div class="content">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.      </p>
+      </div>
+      <h1>Find the word in paragraph</h1>
+  
+      <div class="form">
+        <input type="text" id="keyword" class="form_control" placeholder="Search...">
+      </div>
+      
+      
+      <footer>
+        <h2><a href="https://blogs.stackfindover.com/">Stackfindover Blog</a></a>
+      </footer>
+      <script>
+         function textFind(keyword) {
+        if(keyword) {
+          var content = $("p").text();
+          var searchText = new RegExp(keyword, "ig");
+          var matches = content.match(searchText);       
+
+          if(matches) {
+            $("p").html(content.replace(searchText, function(match){
+              return "<span class='highlight'>"+match+"</span>";
+            }));
+          }else {
+            $('.highlight').removeClass('highlight');
+          }
+        }else{
+          $('.highlight').removeClass('highlight');
+        }
+      }
+      $(document).ready(function(){
+        $('#keyword').on('keyup', function(){
+          textFind($(this).val());
+        })
+      });
+      </script>
+</body>
+</html>
